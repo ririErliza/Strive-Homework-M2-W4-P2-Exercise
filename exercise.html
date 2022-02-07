@@ -128,6 +128,8 @@
         </tr>
     </table>
 
+    <div id="toggle"></div>
+
     <!-- 8) Divide the page using a horizontal line -->
     <hr>
 
@@ -137,9 +139,9 @@
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quis minima ipsum hic numquam beatae, odio vitae obcaecati et commodi suscipit quam eveniet, maiores eaque. Facilis repellat cum perspiciatis assumenda iure.</p>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores saepe vitae et cupiditate veniam mollitia cumque iure rem earum sit quisquam sint, illum nam velit, perspiciatis sed dolore molestias delectus.</p>
         <ul>
-            <li>item</li>
-            <li>item</li>
-            <li>item</li>
+            <li><a href="https://en.wikipedia.org/wiki/Mountain"> item </a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Mountain">item</a></li>
+            <li><a href="https://en.wikipedia.org/wiki/Mountain">item</a></li>
         </ul>
     </div>
 
@@ -179,28 +181,28 @@ const arrayList = array24.join(", ")
 console.log(arrayList)
 
 // 26) Create an array with 100 random numbers in it
-// let array26 = []
-// for (let i=0; i<100; i++){
-//     array26.push(Math.floor(Math.random()*100))
-// }
-// console.log(array26)
+let array26 = []
+for (let i=0; i<100; i++){
+    array26.push(Math.floor(Math.random()*100))
+}
+console.log(array26)
 
 // 27) Write a function to get the maximum and minimum values from the previously created array
-// let maxArr =array26[0]
-// for (let i=1; i<array26.length; i++){
-//     if (array26[i]>maxArr){
-//         maxArr = array26[i]
-//     }
-// }
-// console.log(maxArr)
+let maxArr =array26[0]
+for (let i=1; i<array26.length; i++){
+    if (array26[i]>maxArr){
+        maxArr = array26[i]
+    }
+}
+console.log(maxArr)
 
-// let minArr =array26[0]
-// for (let i=1; i<array26.length; i++){
-//     if (array26[i]<minArr){
-//         minArr = array26[i]
-//     }
-// }
-// console.log(minArr)
+let minArr =array26[0]
+for (let i=1; i<array26.length; i++){
+    if (array26[i]<minArr){
+        minArr = array26[i]
+    }
+}
+console.log(minArr)
 
 // 28) Create an array of arrays, in which every array has 10 random numbers
 
@@ -253,21 +255,121 @@ console.log(whichHigher(arrayA,arrayB)) //didnt work out, showing undefined
 // DOM EXERCISES
 
 // 31) Get the element with an id of "container" from the page
+const element1= document.querySelector("#container")
+
 // 32) Get every <td> element from the page
+const element2= document.querySelectorAll("td")
+
 // 33) Use a loop for printing the text inside of every <td> element in the page
+
 // 34) Write a function to change the heading of the page
+const changeHeading = function(text){
+    let h1=document.querySelector("h1")
+    h1.innerText = text
+}
+
+console.log(changeHeading("Mountains Pictures"))
+
 // 35) Write a function to add an extra row to the table
+const addRow = function(){
+    let tbl=document.querySelector("table")
+    let row=document.createElement("tr")
+    let col=document.createElement("td")
+    
+    row.innerHTML ="<td> Newly added </td>"
+    row.appendChild(col)
+    tbl.appendChild(row)
+}
+
+addRow()
+
 // 36) Write a function to add a class of "test" to each row in the table
+const addClassToRows = function(){
+    let rows = document.querySelectorAll("tr")
+    for (let i=0; i<rows.length; i++){
+        rows[i].classList.add("test")
+    }
+}
+addClassToRows()
+
 // 37) Write a function to add a red background to every link in the page
+const redLink= function(){
+    let getLink = document.querySelectorAll("a")
+    for(let i=0; i<getLink.length; i++){
+        getLink[i].style.background="red"
+    }
+}
+
+redLink()
+
 // 38) Console log "Page loaded" when the page is correctly loaded
-// 39) Write a function to add new items to a unordered list
+window.onload = function(){
+    alert("page loaded")
+}
+
+39) Write a function to add new items to a unordered list
+const addToUl = function(item){
+    let ul=document.querySelector("ul")
+    let li=document.createElement("li")
+
+    li.innerText="new item"
+    ul.appendChild(li)
+}
+
+addToUl()
+
 // 40) Write a function to empty a list
+const emptyAList = function(element){
+    while(element.firstElementChild){ //will while looping through all li inside ul and removing them
+        element.firstElementChild.remove()
+    }
+}
+
+let ul = document.querySelector("ul")
+// emptyAList(ul)
+
 
 // EXTRA EXERCISES
 
 // 41) Add an eventListener to show an alert when the cursor hovers a link, displaying its href property
+const link= document.querySelector("a")
+function showLink(url){
+    alert("https://en.wikipedia.org/wiki/Mountain")
+}
+link.addEventListener('mouseover',showLink)
+
 // 42) Create a button that will hide every image on the page when clicked
+let ol=document.querySelector("ol")
+const button2 = document.createElement("button")
+button2.innerText ="click me"
+ol.appendChild(button2)
+
+function hideImages(){
+    let images=document.querySelectorAll("img")
+    for(let i=0; i<images.length; i++){
+        images[i].style.display="none"
+    }
+}
+button2.addEventListener('click',hideImages)
+
 // 43) Create a button that will hide or show the table on the page when clicked
+let place=document.querySelector("#toggle")
+const button3 = document.createElement("button")
+button3.innerText ="click me"
+place.appendChild(button3)
+
+function toggleTable(){
+    let table=document.querySelector("table")
+    if(table.style.display === "none"){
+        table.style.display = "block"
+    }else{
+        table.style.display = "none"
+    }
+}
+
+button3.addEventListener('click', toggleTable)
+
+
 // 44) Write a function for calculating the sum of every number inside all the table cells (if their content is numeric)
 // 45) Delete the last letter from the heading each time the user clicks on it
 // 46) Change the background color of a <td> if the user clicks on it
